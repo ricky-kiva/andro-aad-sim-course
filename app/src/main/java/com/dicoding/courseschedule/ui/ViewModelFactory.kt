@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.courseschedule.data.DataRepository
+import com.dicoding.courseschedule.ui.add.AddCourseViewModel
 import com.dicoding.courseschedule.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val dataRepository: DataRepository)
@@ -26,6 +27,9 @@ class ViewModelFactory private constructor(private val dataRepository: DataRepos
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(dataRepository) as T
+            }
+            modelClass.isAssignableFrom(AddCourseViewModel::class.java) -> {
+                AddCourseViewModel(dataRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: ${modelClass.name}")
         }
