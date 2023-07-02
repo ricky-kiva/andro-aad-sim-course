@@ -22,7 +22,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var viewModel: HomeViewModel
     private var queryType = QueryType.CURRENT_DAY
 
-    // XTODO 5 : Show today schedule in CardHomeView and implement menu action
+    // TODO 5 : Show today schedule in CardHomeView and !!!implement menu action!!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
