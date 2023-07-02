@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.dicoding.courseschedule.R
+import com.dicoding.courseschedule.notification.DailyReminder
 
 class SettingsFragment : PreferenceFragmentCompat() {
+
+    private lateinit var dailyReminder: DailyReminder
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -26,7 +30,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
 
-        // TODO 11 : Schedule and cancel notification in DailyReminder based on SwitchPreference
+        // XTODO 11 : Schedule and cancel notification in DailyReminder based on SwitchPreference
+        dailyReminder = DailyReminder()
+        val switchPreference = findPreference<SwitchPreference>(getString(R.string.pref_key_notify))
+        switchPreference?.onPreferenceChangeListener =
+            Preference.OnPreferenceChangeListener { preference, newValue ->
+                val enableNotification = newValue as Boolean
+                if (enableNotification) {
+                    dailyReminder.setDailyReminder(requireContext())
+                } else {
+                    dailyReminder.cancelAlarm(requireContext())
+                }
+                true
+            }
     }
 
     private fun updateTheme(nightMode: Int): Boolean {
