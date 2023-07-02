@@ -3,9 +3,11 @@ package com.dicoding.courseschedule.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.dicoding.courseschedule.data.Course
 import com.dicoding.courseschedule.data.DataRepository
 import com.dicoding.courseschedule.util.QueryType
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class HomeViewModel(repository: DataRepository): ViewModel() {
@@ -17,7 +19,12 @@ class HomeViewModel(repository: DataRepository): ViewModel() {
     init {
         _queryType.value = QueryType.CURRENT_DAY
         val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        _todayCourses.value = repository.getTodaySchedule(dayOfWeek)
+
+        viewModelScope.launch {
+            val courses = repository.getTodaySchedule(dayOfWeek)
+            _todayCourses.value = courses
+        }
+
     }
 
     fun setQueryType(queryType: QueryType) {
