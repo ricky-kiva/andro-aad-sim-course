@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseSchedule" >
         <activity
-            android:name=".AddCourseActivity"
+            android:name=".ui.add.AddCourseActivity"
             android:exported="false"
-            android:label="@string/title_activity_add_course"
+            android:label="@string/add_course"
             android:theme="@style/Theme.CourseSchedule.NoActionBar" />
         <activity
             android:name=".ui.detail.DetailActivity"
