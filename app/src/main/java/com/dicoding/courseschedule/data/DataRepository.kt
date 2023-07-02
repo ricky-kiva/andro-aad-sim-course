@@ -16,7 +16,7 @@ class DataRepository(private val dao: CourseDao) {
 
     fun getNearestSchedule(queryType: QueryType) : LiveData<Course?> {
         val query = QueryUtil.nearestQuery(queryType)
-        return dao.getNearestSchedule()
+        return dao.getNearestSchedule(query)
     }
 
     fun getAllCourse(sortType: SortType): LiveData<PagedList<Course>> {
