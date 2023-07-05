@@ -82,8 +82,9 @@
                     android:id="@+id/tv_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dummy_time_hour"
-                    android:textColor="@color/textPrimary" />
+                    android:text="@string/label_minus"
+                    android:textColor="@color/textPrimary"
+                    tools:text="@string/dummy_time_hour" />
 
             </LinearLayout>
 
@@ -121,8 +122,9 @@
                     android:id="@+id/tv_end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dummy_time_hour"
-                    android:textColor="@color/textPrimary" />
+                    android:text="@string/label_minus"
+                    android:textColor="@color/textPrimary"
+                    tools:text="@string/dummy_time_hour" />
 
             </LinearLayout>
 
