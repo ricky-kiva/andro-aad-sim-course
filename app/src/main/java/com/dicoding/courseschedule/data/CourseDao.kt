@@ -19,7 +19,7 @@ interface CourseDao {
     fun getCourse(id: Int): LiveData<Course>
 
     @Query("SELECT * FROM course WHERE day = :day")
-    fun getTodaySchedule(day: Int): List<Course>
+    fun getTodaySchedule(day: Int): LiveData<List<Course>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(course: Course)

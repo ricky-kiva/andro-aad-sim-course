@@ -25,10 +25,10 @@ class DailyReminder : BroadcastReceiver() {
         executeThread {
             val repository = DataRepository.getInstance(context)
             val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-            val courses = repository?.getTodaySchedule(dayOfWeek)
+            val courses = repository.getTodaySchedule(dayOfWeek)
 
             courses?.let {
-                if (it.isNotEmpty()) showNotification(context, it)
+                if (it.value?.isNotEmpty() == true) showNotification(context, it.value!!)
             }
         }
     }

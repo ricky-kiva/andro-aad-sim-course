@@ -1,6 +1,7 @@
 package com.dicoding.courseschedule.data
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
@@ -32,7 +33,7 @@ class DataRepository(private val dao: CourseDao) {
         return dao.getCourse(id)
     }
 
-    fun getTodaySchedule(day: Int) : List<Course> {
+    fun getTodaySchedule(day: Int) : LiveData<List<Course>> {
         return dao.getTodaySchedule(day)
     }
 
@@ -49,13 +50,13 @@ class DataRepository(private val dao: CourseDao) {
         private var instance: DataRepository? = null
         private const val PAGE_SIZE = 10
 
-        fun getInstance(context: Context): DataRepository? {
+        fun getInstance(context: Context): DataRepository {
             return instance ?: synchronized(DataRepository::class.java) {
                 if (instance == null) {
                     val database = CourseDatabase.getInstance(context)
                     instance = DataRepository(database.courseDao())
                 }
-                return instance
+                return instance as DataRepository
             }
         }
     }

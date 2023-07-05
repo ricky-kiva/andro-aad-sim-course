@@ -17,7 +17,7 @@ class ViewModelFactory private constructor(private val dataRepository: DataRepos
             fun getInstance(context: Context): ViewModelFactory =
                 instance ?: synchronized(this) {
                     instance ?: ViewModelFactory(
-                        DataRepository.getInstance(context)!!
+                        DataRepository.getInstance(context)
                     )
                 }
         }
