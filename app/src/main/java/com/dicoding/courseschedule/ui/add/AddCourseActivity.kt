@@ -1,5 +1,6 @@
 package com.dicoding.courseschedule.ui.add
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,6 +10,8 @@ import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.courseschedule.R
 import com.dicoding.courseschedule.ui.ViewModelFactory
+import com.dicoding.courseschedule.ui.home.HomeActivity
+import com.dicoding.courseschedule.ui.list.ListActivity
 import com.dicoding.courseschedule.util.TimePickerFragment
 import com.google.android.material.textfield.TextInputEditText
 
@@ -65,7 +68,7 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
         val day = daySpinner.selectedItemPosition
         val startTime = startTimeTextView.text.toString()
         val endTime = endTimeTextView.text.toString()
-        val lecturer = lecturerEditText.textAlignment.toString().trim()
+        val lecturer = lecturerEditText.text.toString().trim()
         var note = noteEditText.text.toString().trim()
 
         if (courseName.isEmpty()) {
@@ -114,10 +117,13 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
             }
             R.id.action_insert -> {
                 saveCourse()
+                Toast.makeText(this, getString(R.string.info_success_add_course), Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@AddCourseActivity, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
                 true
             }
             else -> true
         }
     }
-
 }
