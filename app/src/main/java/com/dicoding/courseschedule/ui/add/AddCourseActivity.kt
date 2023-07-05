@@ -3,6 +3,7 @@ package com.dicoding.courseschedule.ui.add
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,8 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_course)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         courseNameEditText = findViewById(R.id.ed_course_name)
         daySpinner = findViewById(R.id.spinner_day)
@@ -98,6 +101,11 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_add, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -108,7 +116,7 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
                 saveCourse()
                 true
             }
-            else -> super.onOptionsItemSelected(item)
+            else -> true
         }
     }
 

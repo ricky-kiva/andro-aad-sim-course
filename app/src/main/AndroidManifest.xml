@@ -16,8 +16,7 @@
         <activity
             android:name=".ui.add.AddCourseActivity"
             android:exported="false"
-            android:label="@string/add_course"
-            android:theme="@style/Theme.CourseSchedule.NoActionBar" />
+            android:label="@string/add_course" />
         <activity
             android:name=".ui.detail.DetailActivity"
             android:label="@string/detail"
