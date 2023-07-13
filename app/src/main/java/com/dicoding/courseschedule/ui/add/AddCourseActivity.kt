@@ -75,18 +75,27 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
             Toast.makeText(this, "Please enter course name", Toast.LENGTH_SHORT).show()
         } else if (day == AdapterView.INVALID_POSITION) {
             Toast.makeText(this, "Please set course day", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(startTime)) {
+        } else if (TextUtils.isEmpty(startTime) || startTime == getString(R.string.label_minus)) {
             Toast.makeText(this, "Please set start time", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(endTime)) {
+        } else if (TextUtils.isEmpty(endTime) || endTime == getString(R.string.label_minus)) {
             Toast.makeText(this, "Please set end time", Toast.LENGTH_SHORT).show()
         } else if (lecturer.isEmpty()) {
             Toast.makeText(this, "Please enter lecturer", Toast.LENGTH_SHORT).show()
         } else if (note.isEmpty()) {
             note = "-"
             viewModel.insertCourse(courseName, day, startTime, endTime, lecturer, note)
+            intentToMain()
         } else {
             viewModel.insertCourse(courseName, day, startTime, endTime, lecturer, note)
+            intentToMain()
         }
+    }
+
+    private fun intentToMain() {
+        Toast.makeText(this, getString(R.string.info_success_add_course), Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@AddCourseActivity, HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     private fun formatTime(hour: Int, minute: Int): String {
@@ -117,10 +126,6 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
             }
             R.id.action_insert -> {
                 saveCourse()
-                Toast.makeText(this, getString(R.string.info_success_add_course), Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@AddCourseActivity, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
                 true
             }
             else -> true
