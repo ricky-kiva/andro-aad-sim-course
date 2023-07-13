@@ -1,7 +1,6 @@
 package com.dicoding.courseschedule.data
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
@@ -11,6 +10,7 @@ import com.dicoding.courseschedule.util.QueryUtil
 import com.dicoding.courseschedule.util.QueryUtil.nearestQuery
 import com.dicoding.courseschedule.util.SortType
 import com.dicoding.courseschedule.util.executeThread
+import java.util.*
 
 // XTODO 4 : Implement repository with appropriate dao
 class DataRepository(private val dao: CourseDao) {
@@ -33,8 +33,10 @@ class DataRepository(private val dao: CourseDao) {
         return dao.getCourse(id)
     }
 
-    fun getTodaySchedule(day: Int) : LiveData<List<Course>> {
-        return dao.getTodaySchedule(day)
+    fun getTodaySchedule(): List<Course> {
+        val calendar = Calendar.getInstance()
+        val currentDay = calendar.get(Calendar.DAY_OF_WEEK)
+        return dao.getTodaySchedule(currentDay)
     }
 
     fun insert(course: Course) = executeThread {

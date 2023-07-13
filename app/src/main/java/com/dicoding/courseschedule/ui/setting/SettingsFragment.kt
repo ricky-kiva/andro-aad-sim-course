@@ -17,6 +17,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
         // XTODO 10 : Update theme based on value in ListPreference
 
+        val settingsActivity = activity as SettingsActivity
+        dailyReminder = settingsActivity.getDailyReminder()
+
         val listPreference = findPreference<ListPreference>(getString(R.string.pref_key_dark))
         listPreference?.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { preference, newValue ->
@@ -31,15 +34,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
 
         // XTODO 11 : Schedule and cancel notification in DailyReminder based on SwitchPreference
-        dailyReminder = DailyReminder()
         val switchPreference = findPreference<SwitchPreference>(getString(R.string.pref_key_notify))
-        switchPreference?.onPreferenceChangeListener =
-            Preference.OnPreferenceChangeListener { preference, newValue ->
-                val enableNotification = newValue as Boolean
-                if (enableNotification) {
-                    dailyReminder.setDailyReminder(requireContext())
+        switchPreference?.setOnPreferenceChangeListener { preference, newValue ->
+                if (newValue as Boolean) {
+                    dailyReminder.setDailyReminder(requireContext().applicationContext)
                 } else {
-                    dailyReminder.cancelAlarm(requireContext())
+                    dailyReminder.cancelAlarm(requireContext().applicationContext)
                 }
                 true
             }

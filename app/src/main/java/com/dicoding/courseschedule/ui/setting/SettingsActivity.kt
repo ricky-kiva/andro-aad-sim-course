@@ -3,8 +3,11 @@ package com.dicoding.courseschedule.ui.setting
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.courseschedule.R
+import com.dicoding.courseschedule.notification.DailyReminder
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var dailyReminder: DailyReminder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,5 +19,11 @@ class SettingsActivity : AppCompatActivity() {
                 .commit()
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        dailyReminder = DailyReminder()
+    }
+
+    fun getDailyReminder(): DailyReminder {
+        return dailyReminder
     }
 }
