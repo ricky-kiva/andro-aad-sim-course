@@ -38,8 +38,8 @@ class DailyReminder : BroadcastReceiver() {
         val pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE)
 
         val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 2)
-            set(Calendar.MINUTE, 10)
+            set(Calendar.HOUR_OF_DAY, 6)
+            set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
         }
 
