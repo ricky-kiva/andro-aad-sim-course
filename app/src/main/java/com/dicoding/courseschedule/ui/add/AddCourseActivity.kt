@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.courseschedule.R
 import com.dicoding.courseschedule.ui.ViewModelFactory
 import com.dicoding.courseschedule.ui.home.HomeActivity
-import com.dicoding.courseschedule.ui.list.ListActivity
 import com.dicoding.courseschedule.util.TimePickerFragment
 import com.google.android.material.textfield.TextInputEditText
 
